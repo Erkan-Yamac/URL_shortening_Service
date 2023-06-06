@@ -39,6 +39,18 @@ namespace ShorterUrls.Controllers
             //return "http"+data+"com/"+ ShortCode;
             return Request.RequestUri.GetLeftPart(UriPartial.Authority) + "/api/Shorter?sCode=" + ShortCode;
         }
+        [System.Web.Http.HttpPost]
+        public string Index(string url,string chosenCode)
+        {
+
+            string data = getBetween(url, "http", "com");
+            string datas = getBetween(url, "com", "");
+            //string ShortCode = RandomString(6);
+            var a = insertDb(url, chosenCode);
+            //return datas;
+            //return "http"+data+"com/"+ ShortCode;
+            return Request.RequestUri.GetLeftPart(UriPartial.Authority) + "/api/Shorter?sCode=" + chosenCode;
+        }
         public int insertDb (string url,string shortCode)
         {
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
